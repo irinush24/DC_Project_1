@@ -35,7 +35,7 @@ module rca_sub
     
 endmodule
 
-module rca_tb;
+/*module rca_tb;
     reg [7:0] a, b;
     reg en = 1'b1, op;
     wire [7:0] sum;
@@ -65,4 +65,4 @@ module rca_tb;
         #10;
         $display("SUB: %d - %d = %d (signed: %d)", a, b, sum, $signed(sum));
     end
-endmodule
+endmodule*/
