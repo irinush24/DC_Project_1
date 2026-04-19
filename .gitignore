@@ -1,0 +1,16 @@
+work/
+_info
+transcript
+*.wlf
+
+*.jtag_clockgroup
+*.qws
+*.bak
+*.orig
+
+.DS_Store
+Thumbs.db
+
+*.vcd
+*.ucdb
+covhtmlreport/
