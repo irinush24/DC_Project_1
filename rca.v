@@ -8,30 +8,30 @@ module fac
     assign co = (x & y) | (x & ci) | (ci & y);
 endmodule
 
-module rca_sub
+module rca_sub #(parameter w = 8)
 (
-    input [7:0] a, b,
+    input [w-1:0] a, b,
     input en, op,       // op: 0 = add, 1 = subtract
-    output [7:0] sum,
+    output [w-1:0] sum,
     output co
 );
-    wire [7:0] b_mux, c, s;
+    wire [w-1:0] b_mux, c, s;
 
     // If op is 1, b must be complemented for subtraction, otherwise it stays the same
-    assign b_mux = b ^ {8{op}};
+    assign b_mux = b ^ {w{op}};
 
     // The first carry in is now equivalent to the op because we must add 1 for 2's complement
     fac f0(.x(a[0]), .y(b_mux[0]), .z(s[0]), .co(c[0]), .ci(op));
 
     generate
         genvar i;
-        for(i = 1; i < 8; i = i + 1) begin: rca_generate
+        for(i = 1; i < w; i = i + 1) begin: rca_generate
             fac fi(.x(a[i]), .y(b_mux[i]), .ci(c[i-1]), .z(s[i]), .co(c[i]));
         end 
     endgenerate
 
     assign sum = s;
-    assign co = c[7];
+    assign co = c[w-1];
     
 endmodule
 
@@ -41,7 +41,7 @@ endmodule
     wire [7:0] sum;
     wire co;
 
-    rca_sub dut(.a(a), .b(b), .op(op), .en(en), .sum(sum), .co(co));
+    rca_sub #(.w(8)) dut(.a(a), .b(b), .op(op), .en(en), .sum(sum), .co(co));
 
     initial begin
         // --- Test 1: Simple Addition (5 + 3) ---

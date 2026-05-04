@@ -1,8 +1,8 @@
 # add all Verilog source files, separated by spaces
-set sourcefiles {rca.v}
+set sourcefiles {logic_unit.v}
 
 # set name of the top module
-set topmodule rca_tb
+set topmodule logic_unit_tb
 
 ###################################################
 #####DO NOT MODIFY THE SCRIPT BELLOW THIS LINE#####
